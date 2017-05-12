@@ -1,0 +1,46 @@
+{
+  "name": "react-json-renderer",
+  "version": "0.0.1",
+  "description": "Render React components to a JSON tree",
+  "main": "lib/index.js",
+  "scripts": {
+    "clean:lib": "rm -Rf ./lib",
+    "compile:lib": "babel src --out-dir lib",
+    "build:lib": "npm run clean:lib && npm run compile:lib",
+    "flow": "flow"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaulLeCam/react-json-renderer.git"
+  },
+  "keywords": [
+    "react",
+    "json",
+    "renderer"
+  ],
+  "author": "Paul Le Cam <paul@ulem.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PaulLeCam/react-json-renderer/issues"
+  },
+  "homepage": "https://github.com/PaulLeCam/react-json-renderer#readme",
+  "peerDependencies": {
+    "react": "^15.5.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "eslint": "^3.19.0",
+    "eslint-config-prettier": "^1.7.0",
+    "eslint-plugin-flowtype": "^2.32.1",
+    "eslint-plugin-prettier": "^2.0.1",
+    "eslint-plugin-react": "^6.10.0",
+    "flow-bin": "^0.46.0",
+    "prettier": "^1.3.0",
+    "react": "^15.5.4"
+  }
+}
