@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renderer parses and renders the provided JSON string 1`] = `
+<div>
+  test
+</div>
+`;
+
+exports[`Renderer returns the processed tree 1`] = `
+<div>
+  <span>
+    hello
+  </span>
+  <span>
+    fallback!
+  </span>
+</div>
+`;
+
+exports[`renderFromObject() applies the provided components and fallback 1`] = `
+<View>
+  <Text
+    value="hello"
+  >
+    world
+  </Text>
+  <Fallback
+    source="URI"
+  />
+</View>
+`;
+
+exports[`renderFromObject() returns the default fallback if no components and fallback are provided 1`] = `
+<Fallback>
+  test
+</Fallback>
+`;

@@ -6,9 +6,12 @@ import type {
   ComponentChild,
   ComponentChildren,
   ComponentConfig,
+  ComponentProps,
+  ComponentType,
   ConvertedChild,
   ConvertedChildren,
   ConvertedComponent,
+  ReactComponent,
 } from './types'
 
 export const convertChild = (child: ComponentChild): ConvertedChild => {
@@ -28,29 +31,56 @@ export const convertChildren = (
 ): ConvertedChildren => {
   return Array.isArray(children)
     ? children.map(convertChild)
-    : [convertChild(children)]
+    : convertChild(children)
 }
 
 export const convertToObject = (tree: ComponentConfig): ConvertedComponent => {
-  let type
-  if (typeof tree.type === 'string') {
-    type = tree.type
-  } else if (tree.type.displayName) {
-    type = tree.type.displayName
-  } else if (tree.type.name) {
-    type = tree.type.name
-  }
   const { children, ...props } = tree.props
+  if (typeof tree.key === 'string') {
+    props.key = tree.key
+  }
+
+  if (typeof tree.type === 'string') {
+    return {
+      type: tree.type,
+      props: {
+        ...props,
+        children: convertChildren(children),
+      },
+    }
+  }
+  if (
+    typeof tree.type.prototype === 'object' &&
+    tree.type.prototype &&
+    tree.type.prototype.isReactComponent
+  ) {
+    const instance = new tree.type(tree.props)
+    return {
+      type: tree.type.displayName || tree.type.name,
+      props: {
+        ...props,
+        children: convertChildren(instance.render()),
+      },
+    }
+  }
+  if (typeof tree.type === 'function') {
+    return {
+      type: tree.type.displayName || tree.type.name || 'Unknown',
+      props: {
+        ...props,
+        children: convertChildren(tree.type(tree.props)),
+      },
+    }
+  }
   return {
-    type,
+    type: 'Unsupported',
     props: {
-      ...props,
-      children: convertChildren(children),
+      children: [],
     },
   }
 }
 
-export const renderToJSON = (
+export const convertToJSON = (
   tree: ComponentConfig,
   space?: number | string,
 ): string => {

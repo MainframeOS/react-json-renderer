@@ -1,0 +1,7 @@
+__tests__
+coverage
+.babelrc
+.editorconfig
+.eslintrc.json
+.flowconfig
+.travis.yml

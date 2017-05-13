@@ -13,10 +13,10 @@ const Fallback = () => null
 
 export const renderFromObject = (
   tree: ConvertedComponent,
-  params: RenderParams,
+  params?: RenderParams,
 ) => {
-  const components = params.components || {}
-  const fallback = params.fallback || Fallback
+  const components = (params && params.components) || {}
+  const fallback = (params && params.fallback) || Fallback
 
   const createChild = c => {
     if (c == null) {
@@ -34,7 +34,11 @@ export const renderFromObject = (
   const createComponent = (converted: ConvertedComponent) => {
     const component = components[converted.type] || fallback
     const { children, ...props } = converted.props
-    if (children) props.children = children.map(createChild)
+    if (children) {
+      props.children = Array.isArray(children) // eslint-disable-line react/prop-types
+        ? children.map(createChild)
+        : createChild(children)
+    }
     return createElement(component, props)
   }
 

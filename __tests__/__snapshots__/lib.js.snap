@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`works end-to-end 1`] = `
+<div
+  className="view view-wrapper"
+>
+  <div
+    className="view view-header"
+  >
+    <span
+      className="text"
+    >
+      Title
+    </span>
+  </div>
+  <div
+    className="view view-main"
+  >
+    <span
+      className="text"
+    >
+      Contents
+    </span>
+  </div>
+</div>
+`;
