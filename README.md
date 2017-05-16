@@ -9,12 +9,56 @@ yarn add react-json-renderer # Yarn
 npm install react-json-renderer # npm
 ```
 
-React is a required peer dependencies, make sure to install it as well if you haven't already:
+React is a required peer dependency, make sure to install it as well if you haven't already:
 
 ```sh
 yarn add react # Yarn
 npm install react # npm
 ```
+
+## APIs
+
+### convertToObject
+
+```js
+convertToObject(
+  tree: string, Function, React.Component,
+  params?: Object,
+): Object
+```
+
+Converts a component tree to a formatted Object supported by the `renderFromObject()` function.
+
+### convertToJSON
+
+```js
+convertToJSON(
+  tree: string, Function, React.Component,
+  params?: Object,
+): Object
+```
+
+Converts a component tree to a JSON string supported by the `Renderer` component.
+
+### renderFromObject
+
+```js
+renderFromObject(
+  tree: Object,
+  params?: Object,
+): React.Element<*>
+```
+
+Converts a formatted Object to a React elements tree ready to be rendered by React.
+
+## Components
+
+### Renderer
+
+**Props:**
+
+- `json?: string`: Formatted Object tree in JSON.
+- `tree?: Object`: Formatted Object tree.
 
 ## Example
 

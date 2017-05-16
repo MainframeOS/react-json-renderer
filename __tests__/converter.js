@@ -2,65 +2,102 @@
 
 import React, { Component } from 'react'
 
-import {
-  convertChild,
-  convertChildren,
-  convertToObject,
-  convertToJSON,
-} from '../src/converter'
+import { convertToObject, convertToJSON } from '../src/converter'
 
-describe('convertChild()', () => {
-  it('returns undefined if the child is undefined', () => {
-    expect(convertChild()).toBeUndefined()
-  })
+describe('convertToObject', () => {
+  const Child = ({ text }) => text
 
-  it('returns undefined if the child is null', () => {
-    expect(convertChild(null)).toBeUndefined()
-  })
-
-  it('returns undefined if the child is undefined', () => {
-    expect(convertChild()).toBeUndefined()
-  })
-
-  it('returns the child if the child is a string', () => {
-    expect(convertChild('test')).toBe('test')
-  })
-
-  it('returns the converted component if the child is an object with type', () => {
+  it('returns undefined children if the child is undefined', () => {
     expect(
-      convertChild({
-        type: 'test',
+      convertToObject({
+        type: 'Test',
         props: {
-          hello: 'world',
+          children: undefined,
         },
-        extra: 'whatever',
       }),
     ).toEqual({
-      type: 'test',
+      type: 'Test',
       props: {
-        hello: 'world',
         children: undefined,
       },
     })
   })
-})
 
-describe('convertChildren()', () => {
+  it('returns undefined children if the child is null', () => {
+    expect(
+      convertToObject({
+        type: 'Test',
+        props: {
+          children: null,
+        },
+      }),
+    ).toEqual({
+      type: 'Test',
+      props: {
+        children: undefined,
+      },
+    })
+  })
+
+  it('returns the child as children if the child is a string', () => {
+    expect(
+      convertToObject({
+        type: 'Test',
+        props: {
+          children: 'test',
+        },
+      }),
+    ).toEqual({
+      type: 'Test',
+      props: {
+        children: 'test',
+      },
+    })
+  })
+
+  it('returns the converted component as children if the child is an object with type', () => {
+    expect(
+      convertToObject({
+        type: 'Test',
+        props: {
+          children: {
+            type: 'test',
+            props: {
+              hello: 'world',
+            },
+            extra: 'whatever',
+          },
+        },
+      }),
+    ).toEqual({
+      type: 'Test',
+      props: {
+        children: {
+          type: 'test',
+          props: {
+            hello: 'world',
+            children: undefined,
+          },
+        },
+      },
+    })
+  })
+
   it('returns an array of children if an array is provided', () => {
-    expect(convertChildren(['test', null])).toEqual(['test', undefined])
+    expect(
+      convertToObject({
+        type: 'Test',
+        props: {
+          children: ['test', null],
+        },
+      }),
+    ).toEqual({
+      type: 'Test',
+      props: {
+        children: ['test', undefined],
+      },
+    })
   })
-
-  it('returns a single child if a single child is provided', () => {
-    expect(convertChildren('test')).toEqual('test')
-  })
-
-  it('returns undefined the child is nullish', () => {
-    expect(convertChildren(null)).toBeUndefined()
-  })
-})
-
-describe('convertToObject', () => {
-  const Child = ({ text }) => text
 
   it('accepts as string as type', () => {
     expect(

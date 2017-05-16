@@ -21,16 +21,24 @@ it('works end-to-end', () => {
   const Text = 'Text'
   const View = ({ children }) => children
 
+  const Header = ({ title, ...props }) => (
+    <View {...props} type="header">
+      <Text>{title}</Text>
+    </View>
+  )
+  const Wrapper = ({ children }) => <View type="wrapper">{children}</View>
+
   const json = convertToJSON(
-    <View type="wrapper">
-      <View key="header" type="header">
-        <Text>Title</Text>
-      </View>
+    <Wrapper>
+      <Header key="header" title="Title" />
       <View key="contents" type="main">
         <Text>Contents</Text>
       </View>
-    </View>,
-    2,
+    </Wrapper>,
+    {
+      replacers: { Header, Wrapper },
+      space: 2,
+    },
   )
 
   const components = {
