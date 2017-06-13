@@ -33,6 +33,11 @@ export const renderFromObject = (
 
   const createComponent = (converted: ConvertedComponent) => {
     const component = components[converted.type] || fallback
+
+    if (!converted.props) {
+      return createElement(component)
+    }
+
     const { children, ...props } = converted.props
     if (children) {
       props.children = Array.isArray(children) // eslint-disable-line react/prop-types

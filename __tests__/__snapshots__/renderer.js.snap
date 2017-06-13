@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Renderer handles not having props provided 1`] = `<div />`;
+
 exports[`Renderer parses and renders the provided JSON string 1`] = `
 <div>
   test

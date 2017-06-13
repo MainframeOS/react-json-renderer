@@ -71,6 +71,19 @@ describe('Renderer', () => {
     expect(tree).toMatchSnapshot()
   })
 
+  it('handles not having props provided', () => {
+    const tree = renderer
+      .create(
+        <Renderer
+          tree={{ type: 'View' }}
+          components={components}
+          fallback={Fallback}
+        />,
+      )
+      .toJSON()
+    expect(tree).toMatchSnapshot()
+  })
+
   it('parses and renders the provided JSON string', () => {
     const json = JSON.stringify(tree1)
     const tree = renderer
