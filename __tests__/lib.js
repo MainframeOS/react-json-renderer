@@ -21,12 +21,16 @@ it('works end-to-end', () => {
   const Text = 'Text'
   const View = ({ children }) => children
 
-  const Header = ({ title, ...props }) => (
+  const Header = ({ title, ...props }) =>
     <View {...props} type="header">
-      <Text>{title}</Text>
+      <Text>
+        {title}
+      </Text>
     </View>
-  )
-  const Wrapper = ({ children }) => <View type="wrapper">{children}</View>
+  const Wrapper = ({ children }) =>
+    <View type="wrapper">
+      {children}
+    </View>
 
   const json = convertToJSON(
     <Wrapper>
@@ -42,10 +46,14 @@ it('works end-to-end', () => {
   )
 
   const components = {
-    Text: ({ children }) => <span className="text">{children}</span>,
-    View: ({ children, type }) => (
-      <div className={`view view-${type}`}>{children}</div>
-    ),
+    Text: ({ children }) =>
+      <span className="text">
+        {children}
+      </span>,
+    View: ({ children, type }) =>
+      <div className={`view view-${type}`}>
+        {children}
+      </div>,
   }
 
   const tree = renderer

@@ -6,8 +6,14 @@ import renderer from 'react-test-renderer'
 import { renderFromObject, Renderer } from '../src/renderer'
 
 const Fallback = () => <span>fallback!</span>
-const Text = ({ value }) => <span>{value}</span>
-const View = ({ children }) => <div>{children}</div>
+const Text = ({ value }) =>
+  <span>
+    {value}
+  </span>
+const View = ({ children }) =>
+  <div>
+    {children}
+  </div>
 
 const components = { Text, View }
 
@@ -52,6 +58,18 @@ describe('renderFromObject()', () => {
         components,
         fallback: Fallback,
       }),
+    ).toMatchSnapshot()
+  })
+
+  it('returns null for unsupported children', () => {
+    expect(
+      renderFromObject(
+        {
+          type: 'Text',
+          props: { children: ['test', undefined, 2, null, 'other', true] },
+        },
+        { components },
+      ),
     ).toMatchSnapshot()
   })
 })

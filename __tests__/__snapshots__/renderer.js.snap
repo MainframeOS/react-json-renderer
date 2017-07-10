@@ -32,6 +32,14 @@ exports[`renderFromObject() applies the provided components and fallback 1`] = `
 </View>
 `;
 
+exports[`renderFromObject() returns null for unsupported children 1`] = `
+<Text>
+  test
+  2
+  other
+</Text>
+`;
+
 exports[`renderFromObject() returns the default fallback if no components and fallback are provided 1`] = `
 <Fallback>
   test

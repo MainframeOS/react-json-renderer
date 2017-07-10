@@ -22,8 +22,12 @@ npm install react # npm
 
 ```js
 convertToObject(
-  tree: string, Function, React.Component,
-  params?: Object,
+  tree: React.Element<*>,
+  params?: {
+    replacers?: {
+      [string]: (props: Object) => React.Element<*>,
+    },
+  },
 ): Object
 ```
 
@@ -33,8 +37,13 @@ Converts a component tree to a formatted Object supported by the `renderFromObje
 
 ```js
 convertToJSON(
-  tree: string, Function, React.Component,
-  params?: Object,
+  tree: React.Element<*>,
+  params?: {
+    replacers?: {
+      [string]: (props: Object) => React.Element<*>,
+    },
+    space?: number | string,
+  },
 ): Object
 ```
 
@@ -45,7 +54,12 @@ Converts a component tree to a JSON string supported by the `Renderer` component
 ```js
 renderFromObject(
   tree: Object,
-  params?: Object,
+  params?: {
+    components?: {
+      [type: string]: Class<React.Component<*, *, *>> | (props: Object) => React.Element<*>,
+    },
+    fallback?: Class<React.Component<*, *, *>> | (props: Object) => React.Element<*>,
+  },
 ): React.Element<*>
 ```
 
@@ -71,16 +85,13 @@ import { convertToJSON } from 'react-json-renderer'
 // React components or simple strings can be converted
 const Text = 'Text'
 const View = ({ children }) => children
-const Welcome = ({ name }) => (
+const Welcome = ({ name }) =>
   <View>
     <Text>Welcome {name}!</Text>
   </View>
-)
 
 // Returns the JSON payload to provide to the client
-export const createWelcome = (name) => {
-  return convertToJSON(<Welcome name={name} />)
-}
+export const createWelcome = (name) => convertToJSON(<Welcome name={name} />)
 ```
 
 **Web client**
@@ -99,9 +110,8 @@ const components = {
 const Fallback = ({ children }) => <div className='fallback'>{children}</div>
 
 // Inject the JSON payload from the server and render with provided component and fallback
-export const PayloadRenderer = ({ payload }) => (
+export const PayloadRenderer = ({ payload }) =>
   <Renderer components={components} fallback={Fallback} json={payload} />
-)
 ```
 
 **React-Native client**
@@ -127,9 +137,8 @@ const components = {
   View: RenderView,
 }
 
-export const PayloadRenderer = ({ payload }) => (
+export const PayloadRenderer = ({ payload }) =>
   <Renderer components={components} fallback={RenderView} json={payload} />
-)
 ```
 
 ## License

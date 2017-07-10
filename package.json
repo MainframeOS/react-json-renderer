@@ -1,18 +1,20 @@
 {
   "name": "react-json-renderer",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Render React components to a JSON tree",
   "main": "lib/index.js",
   "scripts": {
-    "clean": "rm -Rf ./lib",
-    "compile": "babel src --out-dir lib",
-    "build": "npm run clean && npm run compile",
+    "build:clean": "del lib",
+    "build:compile": "babel src --out-dir lib",
+    "build:flow": "flow-copy-source src lib",
+    "build:types": "cp ./lib/types.js.flow ./types.js",
+    "build": "npm run build:clean && npm run build:compile && npm run build:flow && npm run build:types",
     "flow": "flow",
     "lint": "eslint ./src",
     "jest": "jest",
-    "test": "npm run lint && npm run jest",
+    "test": "npm run lint && npm run flow && npm run jest",
     "start": "npm test && npm run build",
-    "prepublish": "npm start"
+    "prepublishOnly": "npm start"
   },
   "repository": {
     "type": "git",
@@ -40,16 +42,18 @@
     "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
-    "eslint": "^3.19.0",
-    "eslint-config-prettier": "^2.1.1",
-    "eslint-plugin-flowtype": "^2.34.0",
-    "eslint-plugin-prettier": "^2.1.1",
-    "eslint-plugin-react": "^7.0.1",
-    "flow-bin": "^0.48.0",
+    "del-cli": "^1.1.0",
+    "eslint": "^4.2.0",
+    "eslint-config-prettier": "^2.3.0",
+    "eslint-plugin-flowtype": "^2.34.1",
+    "eslint-plugin-prettier": "^2.1.2",
+    "eslint-plugin-react": "^7.1.0",
+    "flow-bin": "^0.49.1",
+    "flow-copy-source": "^1.2.0",
     "jest": "^20.0.4",
-    "prettier": "^1.4.4",
-    "react": "^15.5.4",
-    "react-test-renderer": "^15.5.4"
+    "prettier": "^1.5.2",
+    "react": "^15.6.1",
+    "react-test-renderer": "^15.6.1"
   },
   "jest": {
     "collectCoverage": true
