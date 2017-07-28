@@ -186,4 +186,34 @@ describe('convertToObject', () => {
       },
     })
   })
+
+  it('uses the processProps options', () => {
+    const processProps = props => {
+      if (props.style) {
+        props.style = 'processed ' + props.style
+      }
+      return props
+    }
+
+    expect(
+      convertToObject(
+        {
+          type: 'Test',
+          props: {
+            style: 'test',
+            other: 'same',
+            children: undefined,
+          },
+        },
+        { processProps },
+      ),
+    ).toEqual({
+      type: 'Test',
+      props: {
+        style: 'processed test',
+        other: 'same',
+        children: undefined,
+      },
+    })
+  })
 })

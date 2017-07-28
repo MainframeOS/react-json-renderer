@@ -24,6 +24,7 @@ npm install react # npm
 convertToObject(
   tree: React.Element<*>,
   params?: {
+    processProps?: (props: Object) => Object,
     replacers?: {
       [string]: (props: Object) => React.Element<*>,
     },
@@ -39,6 +40,7 @@ Converts a component tree to a formatted Object supported by the `renderFromObje
 convertToJSON(
   tree: React.Element<*>,
   params?: {
+    processProps?: (props: Object) => Object,
     replacers?: {
       [string]: (props: Object) => React.Element<*>,
     },

@@ -13,14 +13,18 @@ import type {
 
 type Replacer = (props: ElementProps) => Element<*>
 type ConvertParams = {
+  processProps?: (props: Object) => Object,
   replacers?: { [string]: Replacer },
 }
+
+const defaultProcessProps = (props: Object) => props
 
 export const convertToObject = (
   tree: Element<*>,
   params?: ConvertParams = {},
 ): ConvertedElement => {
   const replacers = params.replacers || {}
+  const processProps = params.processProps || defaultProcessProps
 
   const convertChild = (child: ElementChild): ConvertedChild => {
     if (child == null) {
@@ -68,24 +72,26 @@ export const convertToObject = (
       }
     }
 
+    const props = processProps(tree.props)
+
     const replacer = replacers[name]
     if (replacer) {
-      return convertComponent(replacer(tree.props), key)
+      return convertComponent(replacer(props), key)
     }
 
     let children
     if (type === 'string') {
-      children = convertChildren(tree.props.children)
+      children = convertChildren(props.children)
     } else if (type === 'function') {
-      children = convertChildren(tree.type(tree.props))
+      children = convertChildren(tree.type(props))
     } else if (type === 'class') {
-      const instance = new tree.type(tree.props)
+      const instance = new tree.type(props)
       children = convertChildren(instance.render())
     }
 
     return {
       type: name,
-      props: { ...tree.props, children, key },
+      props: { ...props, children, key },
     }
   }
 
