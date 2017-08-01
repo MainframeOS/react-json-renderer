@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 import { convertToObject, convertToJSON } from '../src/converter'
 
 describe('convertToObject', () => {
-  const Child = ({ text }) => text
+  const Child = 'Child'
 
   it('returns undefined children if the child is undefined', () => {
     expect(
@@ -114,35 +114,6 @@ describe('convertToObject', () => {
           type: 'Child',
           props: {
             text: 'test',
-            children: 'test',
-          },
-        },
-      },
-    })
-  })
-
-  it('accepts a React class as type', () => {
-    class Wrapper extends Component {
-      render() {
-        return <Child text={`wrapped ${this.props.text}`} />
-      }
-    }
-    expect(
-      convertToObject({
-        type: Wrapper,
-        props: {
-          text: 'test',
-        },
-      }),
-    ).toEqual({
-      type: 'Wrapper',
-      props: {
-        text: 'test',
-        children: {
-          type: 'Child',
-          props: {
-            text: 'wrapped test',
-            children: 'wrapped test',
           },
         },
       },
@@ -157,15 +128,9 @@ describe('convertToObject', () => {
         props: {},
       }),
     ).toEqual({
-      type: 'Parent',
+      type: 'Child',
       props: {
-        children: {
-          type: 'Child',
-          props: {
-            text: 'from parent',
-            children: 'from parent',
-          },
-        },
+        text: 'from parent',
       },
     })
   })

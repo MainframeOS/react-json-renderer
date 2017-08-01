@@ -11,10 +11,30 @@ import type {
   ElementProps,
 } from './types'
 
-type Replacer = (props: ElementProps) => Element<*>
+type ComponentMetaType = 'function' | 'string' | 'unknown'
+type ComponentMeta = {
+  name: string,
+  type: ComponentMetaType,
+}
+
 type ConvertParams = {
+  processMeta?: (tree: Element<*>) => ComponentMeta,
   processProps?: (props: Object) => Object,
-  replacers?: { [string]: Replacer },
+}
+
+const defaultProcessMeta = (tree: Element<*>) => {
+  let name, type
+  if (typeof tree.type === 'string') {
+    name = tree.type
+    type = 'string'
+  } else if (typeof tree.type === 'function') {
+    name = tree.type.displayName || tree.type.name || 'Unknown'
+    type = 'function'
+  } else {
+    name = 'Unknown'
+    type = 'unknown'
+  }
+  return { name, type }
 }
 
 const defaultProcessProps = (props: Object) => props
@@ -23,7 +43,7 @@ export const convertToObject = (
   tree: Element<*>,
   params?: ConvertParams = {},
 ): ConvertedElement => {
-  const replacers = params.replacers || {}
+  const processMeta = params.processMeta || defaultProcessMeta
   const processProps = params.processProps || defaultProcessProps
 
   const convertChild = (child: ElementChild): ConvertedChild => {
@@ -49,21 +69,8 @@ export const convertToObject = (
       key = tree.key
     }
 
-    let name, type
-    if (typeof tree.type === 'string') {
-      name = tree.type
-      type = 'string'
-    } else if (
-      typeof tree.type.prototype === 'object' &&
-      tree.type.prototype &&
-      tree.type.prototype.isReactComponent
-    ) {
-      name = tree.type.displayName || tree.type.name || 'Unknown'
-      type = 'class'
-    } else if (typeof tree.type === 'function') {
-      name = tree.type.displayName || tree.type.name || 'Unknown'
-      type = 'function'
-    } else {
+    const { name, type } = processMeta(tree)
+    if (type === 'unknown') {
       return {
         type: 'Unsupported',
         props: {
@@ -73,22 +80,11 @@ export const convertToObject = (
     }
 
     const props = processProps(tree.props)
-
-    const replacer = replacers[name]
-    if (replacer) {
-      return convertComponent(replacer(props), key)
+    if (type === 'function') {
+      return convertComponent(tree.type(props), key)
     }
 
-    let children
-    if (type === 'string') {
-      children = convertChildren(props.children)
-    } else if (type === 'function') {
-      children = convertChildren(tree.type(props))
-    } else if (type === 'class') {
-      const instance = new tree.type(props)
-      children = convertChildren(instance.render())
-    }
-
+    const children = convertChildren(props.children)
     return {
       type: name,
       props: { ...props, children, key },

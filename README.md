@@ -24,10 +24,11 @@ npm install react # npm
 convertToObject(
   tree: React.Element<*>,
   params?: {
+    processMeta?: (tree: React.Element<*>) => ({
+      name: string,
+      type: 'function' | 'string' | 'unknown',
+    }),
     processProps?: (props: Object) => Object,
-    replacers?: {
-      [string]: (props: Object) => React.Element<*>,
-    },
   },
 ): Object
 ```
@@ -40,10 +41,11 @@ Converts a component tree to a formatted Object supported by the `renderFromObje
 convertToJSON(
   tree: React.Element<*>,
   params?: {
+    processMeta?: (tree: React.Element<*>) => ({
+      name: string,
+      type: 'function' | 'string' | 'unknown',
+    }),
     processProps?: (props: Object) => Object,
-    replacers?: {
-      [string]: (props: Object) => React.Element<*>,
-    },
     space?: number | string,
   },
 ): Object
@@ -84,9 +86,9 @@ Converts a formatted Object to a React elements tree ready to be rendered by Rea
 import React from 'react'
 import { convertToJSON } from 'react-json-renderer'
 
-// React components or simple strings can be converted
+// Simple strings will be exported as component types and functions will be executed
 const Text = 'Text'
-const View = ({ children }) => children
+const View = 'View'
 const Welcome = ({ name }) =>
   <View>
     <Text>Welcome {name}!</Text>

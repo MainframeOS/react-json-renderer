@@ -19,7 +19,7 @@ it('exposes the convertToObject, convertToJSON, renderFromObject and Renderer', 
 
 it('works end-to-end', () => {
   const Text = 'Text'
-  const View = ({ children }) => children
+  const View = 'View'
 
   const Header = ({ title, ...props }) =>
     <View {...props} type="header">
@@ -40,7 +40,6 @@ it('works end-to-end', () => {
       </View>
     </Wrapper>,
     {
-      replacers: { Header, Wrapper },
       space: 2,
     },
   )
