@@ -94,7 +94,7 @@ describe('convertToObject', () => {
     ).toEqual({
       type: 'Test',
       props: {
-        children: ['test', undefined],
+        children: ['test'],
       },
     })
   })
@@ -131,6 +131,48 @@ describe('convertToObject', () => {
       type: 'Child',
       props: {
         text: 'from parent',
+      },
+    })
+  })
+
+  it('supports iterating over children', () => {
+    const Parent = 'Parent'
+    expect(
+      convertToObject(
+        <Parent>
+          {['a', 'b', 'c'].map(n => <Child key={n} />)}
+          <Child test />
+        </Parent>,
+      ),
+    ).toEqual({
+      type: 'Parent',
+      props: {
+        children: [
+          {
+            type: 'Child',
+            props: {
+              key: 'a',
+            },
+          },
+          {
+            type: 'Child',
+            props: {
+              key: 'b',
+            },
+          },
+          {
+            type: 'Child',
+            props: {
+              key: 'c',
+            },
+          },
+          {
+            type: 'Child',
+            props: {
+              test: true,
+            },
+          },
+        ],
       },
     })
   })

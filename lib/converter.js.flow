@@ -1,6 +1,6 @@
 // @flow
 
-import React, { type Element } from 'react'
+import React, { Children, type Element } from 'react'
 
 import type {
   ConvertedChild,
@@ -60,7 +60,7 @@ export const convertToObject = (
 
   const convertChildren = (children: ElementChildren): ConvertedChildren => {
     return Array.isArray(children)
-      ? children.map(convertChild)
+      ? Children.map(children, convertChild)
       : convertChild(children)
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "react-json-renderer",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Render React components to a JSON tree",
   "main": "lib/index.js",
   "scripts": {
