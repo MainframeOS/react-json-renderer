@@ -1,23 +1,23 @@
 // @flow
 
-import type { Component, Element } from 'react'
+import type { Component, Element, Node } from 'react'
 
-export type FunctionComponent = (props: Object) => Element<*>
-
-export type ClassComponent = Class<Component<*, *, *>>
-
-export type AnyComponent = FunctionComponent | ClassComponent
-
-export type ElementChild = void | number | string | Element<*>
+export type ElementChild = void | null | boolean | number | string | Element<*>
 
 export type ElementChildren = ElementChild | Array<ElementChild>
 
 export type ElementProps = {
-  children?: ElementChildren,
+  children?: Node,
   [key: string]: mixed,
 }
 
-export type ConvertedChild = void | number | string | ConvertedElement
+export type ConvertedChild =
+  | void
+  | null
+  | boolean
+  | number
+  | string
+  | ConvertedElement
 
 export type ConvertedChildren = ConvertedChild | Array<ConvertedChild>
 

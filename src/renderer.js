@@ -1,12 +1,12 @@
 // @flow
 
-import React, { createElement, Component } from 'react'
+import React, { createElement, PureComponent, type ComponentType } from 'react'
 
-import type { AnyComponent, ConvertedElement } from './types'
+import type { ConvertedElement } from './types'
 
 type RenderParams = {
-  components?: { [type: string]: AnyComponent },
-  fallback?: AnyComponent,
+  components?: { [type: string]: ComponentType<*> },
+  fallback?: ComponentType<*>,
 }
 
 const Fallback = () => null
@@ -22,7 +22,11 @@ export const renderFromObject = (
     if (c == null) {
       return null
     }
-    if (typeof c === 'number' || typeof c === 'string') {
+    if (
+      typeof c === 'boolean' ||
+      typeof c === 'number' ||
+      typeof c === 'string'
+    ) {
       return c
     }
     if (c.type) {
@@ -39,7 +43,7 @@ export const renderFromObject = (
     }
 
     const { children, ...props } = converted.props
-    if (children) {
+    if (children != null) {
       props.children = Array.isArray(children) // eslint-disable-line react/prop-types
         ? children.map(createChild)
         : createChild(children)
@@ -50,17 +54,19 @@ export const renderFromObject = (
   return createFromObject(tree)
 }
 
-export class Renderer extends Component {
-  props: RenderParams & {
-    json?: string,
-    tree?: ConvertedElement,
-  }
+type RendererProps = {
+  json?: string,
+  tree?: ConvertedElement,
+} & RenderParams
+
+export class Renderer extends PureComponent<RendererProps> {
+  props: RendererProps
 
   render() {
     const { json, tree, ...params } = this.props
     let obj
     if (tree) obj = tree
-    else if (json) obj = JSON.parse(json)
+    else if (json) obj = JSON.parse(json) // flowlint-line sketchy-null-string:off
 
     return obj ? renderFromObject(obj, params) : null
   }

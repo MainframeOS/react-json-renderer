@@ -50,7 +50,11 @@ export const convertToObject = (
     if (child == null) {
       return
     }
-    if (typeof child === 'number' || typeof child === 'string') {
+    if (
+      typeof child === 'boolean' ||
+      typeof child === 'number' ||
+      typeof child === 'string'
+    ) {
       return child
     }
     if (child.type) {

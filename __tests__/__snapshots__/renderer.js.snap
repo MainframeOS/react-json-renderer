@@ -37,6 +37,7 @@ exports[`renderFromObject() returns null for unsupported children 1`] = `
   test
   2
   other
+  true
 </Text>
 `;
 

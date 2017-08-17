@@ -22,9 +22,9 @@ npm install react # npm
 
 ```js
 convertToObject(
-  tree: React.Element<*>,
+  tree: React.Element<any>,
   params?: {
-    processMeta?: (tree: React.Element<*>) => ({
+    processMeta?: (tree: React.Element<any>) => ({
       name: string,
       type: 'function' | 'string' | 'unknown',
     }),
@@ -41,7 +41,7 @@ Converts a component tree to a formatted Object supported by the `renderFromObje
 convertToJSON(
   tree: React.Element<*>,
   params?: {
-    processMeta?: (tree: React.Element<*>) => ({
+    processMeta?: (tree: React.Element<any>) => ({
       name: string,
       type: 'function' | 'string' | 'unknown',
     }),
@@ -60,9 +60,9 @@ renderFromObject(
   tree: Object,
   params?: {
     components?: {
-      [type: string]: Class<React.Component<*, *, *>> | (props: Object) => React.Element<*>,
+      [type: string]: React.ComponentType<any>,
     },
-    fallback?: Class<React.Component<*, *, *>> | (props: Object) => React.Element<*>,
+    fallback?: React.ComponentType<any>,
   },
 ): React.Element<*>
 ```
