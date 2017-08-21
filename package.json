@@ -1,6 +1,6 @@
 {
   "name": "react-json-renderer",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Render React components to a JSON tree",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -17,7 +17,7 @@
     "jest": "BABEL_ENV=development jest",
     "test": "npm run lint && npm run flow && npm run jest",
     "start": "npm test && npm run build",
-    "prepublishOnly": "npm npm run build"
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
