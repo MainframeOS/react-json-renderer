@@ -102,6 +102,30 @@ describe('Renderer', () => {
     expect(tree).toMatchSnapshot()
   })
 
+  it('supports nesting children arrays', () => {
+    const tree = renderer
+      .create(
+        <Renderer
+          tree={{
+            type: 'View',
+            props: {
+              children: [
+                [{ type: 'Text', props: { value: 'Hello' } }],
+                [
+                  { type: 'Text', props: { value: ' nested ' } },
+                  [[{ type: 'Text', props: { value: 'children' } }]],
+                ],
+              ],
+            },
+          }}
+          components={components}
+          fallback={Fallback}
+        />,
+      )
+      .toJSON()
+    expect(tree).toMatchSnapshot()
+  })
+
   it('parses and renders the provided JSON string', () => {
     const json = JSON.stringify(tree1)
     const tree = renderer

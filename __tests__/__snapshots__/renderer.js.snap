@@ -19,6 +19,20 @@ exports[`Renderer returns the processed tree 1`] = `
 </div>
 `;
 
+exports[`Renderer supports nesting children arrays 1`] = `
+<div>
+  <span>
+    Hello
+  </span>
+  <span>
+     nested 
+  </span>
+  <span>
+    children
+  </span>
+</div>
+`;
+
 exports[`renderFromObject() applies the provided components and fallback 1`] = `
 <View>
   <Text

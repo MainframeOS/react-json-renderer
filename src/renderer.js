@@ -22,6 +22,9 @@ export const renderFromObject = (
     if (c == null) {
       return null
     }
+    if (Array.isArray(c)) {
+      return c.map(createChild)
+    }
     if (
       typeof c === 'boolean' ||
       typeof c === 'number' ||
@@ -44,9 +47,7 @@ export const renderFromObject = (
 
     const { children, ...props } = converted.props
     if (children != null) {
-      props.children = Array.isArray(children) // eslint-disable-line react/prop-types
-        ? children.map(createChild)
-        : createChild(children)
+      props.children = createChild(children)
     }
     return createElement(component, props)
   }

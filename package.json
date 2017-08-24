@@ -21,15 +21,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PaulLeCam/react-json-renderer.git"
+    "url": "git+https://github.com/thusfresh/react-json-renderer.git"
   },
-  "keywords": ["react", "json", "renderer"],
-  "author": "Paul Le Cam <paul@ulem.net>",
+  "keywords": [
+    "react",
+    "json",
+    "renderer"
+  ],
+  "author": "Paul Le Cam <paul@mainframe.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/PaulLeCam/react-json-renderer/issues"
+    "url": "https://github.com/thusfresh/react-json-renderer/issues"
   },
-  "homepage": "https://github.com/PaulLeCam/react-json-renderer#readme",
+  "homepage": "https://github.com/thusfresh/react-json-renderer#readme",
   "peerDependencies": {
     "react": "^15.0.0"
   },
@@ -46,9 +50,9 @@
     "eslint-config-prettier": "^2.3.0",
     "eslint-plugin-flowtype": "^2.35.0",
     "eslint-plugin-prettier": "^2.2.0",
-    "eslint-plugin-react": "^7.2.1",
+    "eslint-plugin-react": "^7.3.0",
     "flow-bin": "^0.53.1",
-    "flow-copy-source": "^1.2.0",
+    "flow-copy-source": "^1.2.1",
     "jest": "^20.0.4",
     "prettier": "^1.5.3",
     "react": "^15.6.1",

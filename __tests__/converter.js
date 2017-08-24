@@ -177,6 +177,56 @@ describe('convertToObject', () => {
     })
   })
 
+  it('supports nested children arrays', () => {
+    const Parent = 'Parent'
+    expect(
+      convertToObject(
+        <Parent>
+          {[<Child key="a" test />, <Child key="b" />]}
+          {[[<Child key="c" />], <Child key="d" test />, [[<Child key="e" />]]]}
+        </Parent>,
+      ),
+    ).toEqual({
+      type: 'Parent',
+      props: {
+        children: [
+          {
+            type: 'Child',
+            props: {
+              key: 'a',
+              test: true,
+            },
+          },
+          {
+            type: 'Child',
+            props: {
+              key: 'b',
+            },
+          },
+          {
+            type: 'Child',
+            props: {
+              key: 'c',
+            },
+          },
+          {
+            type: 'Child',
+            props: {
+              key: 'd',
+              test: true,
+            },
+          },
+          {
+            type: 'Child',
+            props: {
+              key: 'e',
+            },
+          },
+        ],
+      },
+    })
+  })
+
   it('returns an unsupported component with empty props if the type is unknow', () => {
     expect(
       convertToObject({
