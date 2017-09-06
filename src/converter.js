@@ -18,11 +18,11 @@ type ComponentMeta = {
 }
 
 type ConvertParams = {
-  processMeta?: (tree: Element<*>) => ComponentMeta,
+  processMeta?: (tree: Element<any>) => ComponentMeta,
   processProps?: (props: Object) => Object,
 }
 
-const defaultProcessMeta = (tree: Element<*>) => {
+const defaultProcessMeta = (tree: Element<any>) => {
   let name, type
   if (typeof tree.type === 'string') {
     name = tree.type
@@ -40,7 +40,7 @@ const defaultProcessMeta = (tree: Element<*>) => {
 const defaultProcessProps = (props: Object) => props
 
 export const convertToObject = (
-  tree: Element<*>,
+  tree: Element<any>,
   params?: ConvertParams = {},
 ): ConvertedElement => {
   const processMeta = params.processMeta || defaultProcessMeta
@@ -68,7 +68,7 @@ export const convertToObject = (
       : convertChild(children)
   }
 
-  const convertComponent = (tree: Element<*>, key?: string) => {
+  const convertComponent = (tree: Element<any>, key?: string) => {
     if (typeof tree.key === 'string') {
       key = tree.key
     }
@@ -103,7 +103,7 @@ type ConvertJSONParams = ConvertParams & {
 }
 
 export const convertToJSON = (
-  tree: Element<*>,
+  tree: Element<any>,
   params?: ConvertJSONParams = {},
 ): string => {
   const { space, ...convertParams } = params

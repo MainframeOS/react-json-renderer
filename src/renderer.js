@@ -5,8 +5,8 @@ import React, { createElement, PureComponent, type ComponentType } from 'react'
 import type { ConvertedElement } from './types'
 
 type RenderParams = {
-  components?: { [type: string]: ComponentType<*> },
-  fallback?: ComponentType<*>,
+  components?: { [type: string]: ComponentType<any> },
+  fallback?: ComponentType<any>,
 }
 
 const Fallback = () => null
@@ -47,7 +47,7 @@ export const renderFromObject = (
 
     const { children, ...props } = converted.props
     if (children != null) {
-      props.children = createChild(children)
+      ;(props: Object).children = createChild(children)
     }
     return createElement(component, props)
   }

@@ -2,7 +2,13 @@
 
 import type { Component, Element, Node } from 'react'
 
-export type ElementChild = void | null | boolean | number | string | Element<*>
+export type ElementChild =
+  | void
+  | null
+  | boolean
+  | number
+  | string
+  | Element<any>
 
 export type ElementChildren = ElementChild | Array<ElementChild>
 
