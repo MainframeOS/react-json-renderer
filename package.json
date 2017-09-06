@@ -1,6 +1,6 @@
 {
   "name": "react-json-renderer",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Render React components to a JSON tree",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -23,7 +23,11 @@
     "type": "git",
     "url": "git+https://github.com/thusfresh/react-json-renderer.git"
   },
-  "keywords": ["react", "json", "renderer"],
+  "keywords": [
+    "react",
+    "json",
+    "renderer"
+  ],
   "author": "Paul Le Cam <paul@mainframe.com>",
   "license": "MIT",
   "bugs": {
