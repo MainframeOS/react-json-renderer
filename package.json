@@ -11,7 +11,8 @@
     "compile:es": "BABEL_ENV=esm babel src --out-dir es",
     "build:compile": "npm run compile:lib && npm run compile:es",
     "build:flow": "flow-copy-source src lib && flow-copy-source src es",
-    "build": "npm run build:clean && npm run build:compile && npm run build:flow",
+    "build":
+      "npm run build:clean && npm run build:compile && npm run build:flow",
     "flow": "flow check",
     "lint": "eslint ./src",
     "jest": "BABEL_ENV=development jest",
@@ -23,11 +24,7 @@
     "type": "git",
     "url": "git+https://github.com/thusfresh/react-json-renderer.git"
   },
-  "keywords": [
-    "react",
-    "json",
-    "renderer"
-  ],
+  "keywords": ["react", "json", "renderer"],
   "author": "Paul Le Cam <paul@mainframe.com>",
   "license": "MIT",
   "bugs": {
@@ -35,28 +32,28 @@
   },
   "homepage": "https://github.com/thusfresh/react-json-renderer#readme",
   "peerDependencies": {
-    "react": "^15.0.0"
+    "react": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
-    "babel-eslint": "^7.2.3",
-    "babel-jest": "^21.0.0",
+    "babel-eslint": "^8.0.1",
+    "babel-jest": "^21.2.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
     "del-cli": "^1.1.0",
-    "eslint": "^4.6.1",
-    "eslint-config-prettier": "^2.4.0",
-    "eslint-plugin-flowtype": "^2.35.1",
-    "eslint-plugin-prettier": "^2.2.0",
-    "eslint-plugin-react": "^7.3.0",
-    "flow-bin": "^0.54.1",
+    "eslint": "^4.7.2",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-plugin-flowtype": "^2.36.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-react": "^7.4.0",
+    "flow-bin": "^0.56.0",
     "flow-copy-source": "^1.2.1",
-    "jest": "^21.0.1",
-    "prettier": "^1.6.1",
-    "react": "^15.6.1",
-    "react-test-renderer": "^15.6.1"
+    "jest": "^21.2.1",
+    "prettier": "^1.7.2",
+    "react": "^16.0.0",
+    "react-test-renderer": "^16.0.0"
   },
   "jest": {
     "collectCoverage": true

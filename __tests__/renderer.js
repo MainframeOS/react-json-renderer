@@ -6,14 +6,8 @@ import renderer from 'react-test-renderer'
 import { renderFromObject, Renderer } from '../src/renderer'
 
 const Fallback = () => <span>fallback!</span>
-const Text = ({ value }) =>
-  <span>
-    {value}
-  </span>
-const View = ({ children }) =>
-  <div>
-    {children}
-  </div>
+const Text = ({ value }) => <span>{value}</span>
+const View = ({ children }) => <div>{children}</div>
 
 const components = { Text, View }
 
@@ -110,10 +104,10 @@ describe('Renderer', () => {
             type: 'View',
             props: {
               children: [
-                [{ type: 'Text', props: { value: 'Hello' } }],
+                [{ type: 'Text', props: { key: '1', value: 'Hello' } }],
                 [
-                  { type: 'Text', props: { value: ' nested ' } },
-                  [[{ type: 'Text', props: { value: 'children' } }]],
+                  { type: 'Text', props: { key: '2', value: ' nested ' } },
+                  [[{ type: 'Text', props: { key: '3', value: 'children' } }]],
                 ],
               ],
             },
