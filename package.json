@@ -1,12 +1,16 @@
 {
   "name": "react-json-renderer",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Render React components to a JSON tree",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MainframeHQ/react-json-renderer.git"
   },
-  "keywords": ["react", "json", "renderer"],
+  "keywords": [
+    "react",
+    "json",
+    "renderer"
+  ],
   "bugs": {
     "url": "https://github.com/MainframeHQ/react-json-renderer/issues"
   },
@@ -22,8 +26,7 @@
     "compile:es": "BABEL_ENV=esm babel src --out-dir es",
     "build:compile": "npm run compile:lib && npm run compile:es",
     "build:flow": "flow-copy-source src lib && flow-copy-source src es",
-    "build":
-      "npm run build:clean && npm run build:compile && npm run build:flow",
+    "build": "npm run build:clean && npm run build:compile && npm run build:flow",
     "flow": "flow check",
     "lint": "eslint ./src",
     "jest": "BABEL_ENV=development jest",
