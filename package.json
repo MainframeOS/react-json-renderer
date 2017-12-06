@@ -2,6 +2,17 @@
   "name": "react-json-renderer",
   "version": "0.5.3",
   "description": "Render React components to a JSON tree",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MainframeHQ/react-json-renderer.git"
+  },
+  "keywords": ["react", "json", "renderer"],
+  "bugs": {
+    "url": "https://github.com/MainframeHQ/react-json-renderer/issues"
+  },
+  "homepage": "https://github.com/MainframeHQ/react-json-renderer#readme",
+  "author": "Mainframe",
+  "license": "MIT",
   "main": "lib/index.js",
   "module": "es/index.js",
   "jsnext:main": "es/index.js",
@@ -11,7 +22,8 @@
     "compile:es": "BABEL_ENV=esm babel src --out-dir es",
     "build:compile": "npm run compile:lib && npm run compile:es",
     "build:flow": "flow-copy-source src lib && flow-copy-source src es",
-    "build": "npm run build:clean && npm run build:compile && npm run build:flow",
+    "build":
+      "npm run build:clean && npm run build:compile && npm run build:flow",
     "flow": "flow check",
     "lint": "eslint ./src",
     "jest": "BABEL_ENV=development jest",
@@ -19,44 +31,29 @@
     "start": "npm test && npm run build",
     "prepublishOnly": "npm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/thusfresh/react-json-renderer.git"
-  },
-  "keywords": [
-    "react",
-    "json",
-    "renderer"
-  ],
-  "author": "Paul Le Cam <paul@mainframe.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/thusfresh/react-json-renderer/issues"
-  },
-  "homepage": "https://github.com/thusfresh/react-json-renderer#readme",
   "peerDependencies": {
     "react": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.1",
+    "babel-eslint": "^8.0.3",
     "babel-jest": "^21.2.0",
-    "babel-preset-env": "^1.6.0",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
     "del-cli": "^1.1.0",
-    "eslint": "^4.7.2",
-    "eslint-config-prettier": "^2.6.0",
-    "eslint-plugin-flowtype": "^2.36.0",
+    "eslint": "^4.12.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-flowtype": "^2.39.1",
     "eslint-plugin-prettier": "^2.3.1",
-    "eslint-plugin-react": "^7.4.0",
-    "flow-bin": "^0.56.0",
+    "eslint-plugin-react": "^7.5.1",
+    "flow-bin": "^0.60.1",
     "flow-copy-source": "^1.2.1",
     "jest": "^21.2.1",
-    "prettier": "^1.7.2",
-    "react": "^16.0.0",
-    "react-test-renderer": "^16.0.0"
+    "prettier": "^1.9.1",
+    "react": "^16.2.0",
+    "react-test-renderer": "^16.2.0"
   },
   "jest": {
     "collectCoverage": true
