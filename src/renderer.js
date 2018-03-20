@@ -16,6 +16,10 @@ export const renderFromObject = (
   params?: RenderParams,
 ) => {
   const components = (params && params.components) || {}
+  if (React.Fragment) {
+    components['Fragment'] = React.Fragment
+  }
+
   const fallback = (params && params.fallback) || Fallback
 
   const createChild = c => {

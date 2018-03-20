@@ -30,6 +30,9 @@ const defaultProcessMeta = (tree: Element<any>) => {
   } else if (typeof tree.type === 'function') {
     name = tree.type.displayName || tree.type.name || 'Unknown'
     type = 'function'
+  } else if (tree.type === React.Fragment) {
+    name = 'Fragment'
+    type = 'fragment'
   } else {
     name = 'Unknown'
     type = 'unknown'
