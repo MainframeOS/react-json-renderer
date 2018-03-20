@@ -120,6 +120,39 @@ describe('Renderer', () => {
     expect(tree).toMatchSnapshot()
   })
 
+  it('supports fragments', () => {
+    const tree = renderer
+      .create(
+        <Renderer
+          tree={{
+            props: {
+              children: [
+                {
+                  type: 'Text',
+                  props: {
+                    key: '1',
+                    value: 'Hello'
+                  }
+                },
+                {
+                  type: 'Text',
+                  props: {
+                    key: '2',
+                    value: 'Welt'
+                  }
+                },
+              ]
+            },
+            type: 'Fragment'
+          }}
+          components={components}
+          fallback={Fallback}
+        />,
+      )
+      .toJSON()
+    expect(tree).toMatchSnapshot()
+  })
+
   it('parses and renders the provided JSON string', () => {
     const json = JSON.stringify(tree1)
     const tree = renderer

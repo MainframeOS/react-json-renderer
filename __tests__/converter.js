@@ -244,6 +244,36 @@ describe('convertToObject', () => {
     })
   })
 
+  it('returns fragments', () => {
+    expect(
+      convertToObject((
+        <React.Fragment>
+          <Child key="a" test />
+          <Child key="b" />
+        </React.Fragment>
+      )),
+    ).toEqual({
+      props: {
+        children: [
+          {
+            type: 'Child',
+            props: {
+              key: 'a',
+              test: true,
+            },
+          },
+          {
+            type: 'Child',
+            props: {
+              key: 'b',
+            },
+          },
+        ]
+      },
+      type: 'Fragment'
+    });
+  })
+
   it('uses the processProps options', () => {
     const processProps = props => {
       if (props.style) {
