@@ -1,5 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Fragment works end-to-end 1`] = `
+Array [
+  <span
+    className="text"
+  >
+    hello
+  </span>,
+  <span
+    className="text"
+  >
+    test
+  </span>,
+]
+`;
+
 exports[`works end-to-end 1`] = `
 <div
   className="view view-wrapper"

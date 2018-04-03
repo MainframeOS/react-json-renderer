@@ -19,6 +19,17 @@ exports[`Renderer returns the processed tree 1`] = `
 </div>
 `;
 
+exports[`Renderer supports Fragment 1`] = `
+Array [
+  <span>
+    Hello
+  </span>,
+  <span>
+    world
+  </span>,
+]
+`;
+
 exports[`Renderer supports nesting children arrays 1`] = `
 <div>
   <span>

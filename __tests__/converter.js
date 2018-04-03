@@ -1,6 +1,6 @@
 /* global describe it */
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 
 import { convertToObject, convertToJSON } from '../src/converter'
 
@@ -220,6 +220,36 @@ describe('convertToObject', () => {
             type: 'Child',
             props: {
               key: 'e',
+            },
+          },
+        ],
+      },
+    })
+  })
+
+  it('supports Fragment', () => {
+    expect(
+      convertToObject(
+        <Fragment>
+          <Child key="a" test />
+          <Child key="b" />
+        </Fragment>,
+      ),
+    ).toEqual({
+      type: 'Fragment',
+      props: {
+        children: [
+          {
+            type: 'Child',
+            props: {
+              key: 'a',
+              test: true,
+            },
+          },
+          {
+            type: 'Child',
+            props: {
+              key: 'b',
             },
           },
         ],

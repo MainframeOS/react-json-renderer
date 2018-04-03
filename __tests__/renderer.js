@@ -1,6 +1,6 @@
 /* global describe it */
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import renderer from 'react-test-renderer'
 
 import { renderFromObject, Renderer } from '../src/renderer'
@@ -109,6 +109,27 @@ describe('Renderer', () => {
                   { type: 'Text', props: { key: '2', value: ' nested ' } },
                   [[{ type: 'Text', props: { key: '3', value: 'children' } }]],
                 ],
+              ],
+            },
+          }}
+          components={components}
+          fallback={Fallback}
+        />,
+      )
+      .toJSON()
+    expect(tree).toMatchSnapshot()
+  })
+
+  it('supports Fragment', () => {
+    const tree = renderer
+      .create(
+        <Renderer
+          tree={{
+            type: 'Fragment',
+            props: {
+              children: [
+                { type: 'Text', props: { key: '1', value: 'Hello' } },
+                { type: 'Text', props: { key: '2', value: 'world' } },
               ],
             },
           }}

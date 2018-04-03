@@ -1,12 +1,17 @@
 // @flow
 
-import React, { createElement, PureComponent, type ComponentType } from 'react'
+import React, {
+  createElement,
+  Fragment,
+  PureComponent,
+  type ComponentType,
+} from 'react'
 
 import type { ConvertedElement } from './types'
 
 type RenderParams = {
-  components?: { [type: string]: ComponentType<any> },
-  fallback?: ComponentType<any>,
+  components?: { [type: string]: ComponentType<*> },
+  fallback?: ComponentType<*>,
 }
 
 const Fallback = () => null
@@ -16,6 +21,8 @@ export const renderFromObject = (
   params?: RenderParams,
 ) => {
   const components = (params && params.components) || {}
+  components.Fragment = Fragment
+
   const fallback = (params && params.fallback) || Fallback
 
   const createChild = c => {
@@ -47,6 +54,7 @@ export const renderFromObject = (
 
     const { children, ...props } = converted.props
     if (children != null) {
+      // flowlint-next-line unclear-type:off
       ;(props: Object).children = createChild(children)
     }
     return createElement(component, props)

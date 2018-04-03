@@ -1,5 +1,6 @@
 __tests__
 coverage
+flow-typed
 src
 .babelrc
 .editorconfig

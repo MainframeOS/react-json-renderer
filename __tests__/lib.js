@@ -1,6 +1,6 @@
 /* global it */
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import renderer from 'react-test-renderer'
 
 import {
@@ -45,6 +45,27 @@ it('works end-to-end', () => {
     View: ({ children, type }) => (
       <div className={`view view-${type}`}>{children}</div>
     ),
+  }
+
+  const tree = renderer
+    .create(<Renderer components={components} json={json} />)
+    .toJSON()
+  expect(tree).toMatchSnapshot()
+})
+
+it('Fragment works end-to-end', () => {
+  const Text = 'Text'
+
+  const json = convertToJSON(
+    <Fragment>
+      <Text key="1">hello</Text>
+      <Text key="2">test</Text>
+    </Fragment>,
+    { space: 2 },
+  )
+
+  const components = {
+    Text: ({ children }) => <span className="text">{children}</span>,
   }
 
   const tree = renderer

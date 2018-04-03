@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Children, type Element } from 'react'
+import React, { Children, type Element, Fragment } from 'react'
 
 import type {
   ConvertedChild,
@@ -18,13 +18,16 @@ type ComponentMeta = {
 }
 
 type ConvertParams = {
-  processMeta?: (tree: Element<any>) => ComponentMeta,
-  processProps?: (props: Object) => Object,
+  processMeta?: (tree: Element<*>) => ComponentMeta,
+  processProps?: (props: Object) => Object, // flowlint-line unclear-type:off
 }
 
-const defaultProcessMeta = (tree: Element<any>) => {
+const defaultProcessMeta = (tree: Element<*>) => {
   let name, type
-  if (typeof tree.type === 'string') {
+  if (tree.type === Fragment) {
+    name = 'Fragment'
+    type = 'fragment'
+  } else if (typeof tree.type === 'string') {
     name = tree.type
     type = 'string'
   } else if (typeof tree.type === 'function') {
@@ -37,10 +40,11 @@ const defaultProcessMeta = (tree: Element<any>) => {
   return { name, type }
 }
 
+// flowlint-next-line unclear-type:off
 const defaultProcessProps = (props: Object) => props
 
 export const convertToObject = (
-  tree: Element<any>,
+  tree: Element<*>,
   params?: ConvertParams = {},
 ): ConvertedElement => {
   const processMeta = params.processMeta || defaultProcessMeta
@@ -68,7 +72,7 @@ export const convertToObject = (
       : convertChild(children)
   }
 
-  const convertComponent = (tree: Element<any>, key?: string) => {
+  const convertComponent = (tree: Element<*>, key?: string) => {
     if (typeof tree.key === 'string') {
       key = tree.key
     }
@@ -103,7 +107,7 @@ type ConvertJSONParams = ConvertParams & {
 }
 
 export const convertToJSON = (
-  tree: Element<any>,
+  tree: Element<*>,
   params?: ConvertJSONParams = {},
 ): string => {
   const { space, ...convertParams } = params
